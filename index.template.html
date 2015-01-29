@@ -1,0 +1,131 @@
+<html>
+<head>
+    <title>Fudge Factory - BitTorrent Tracker Proxy</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <form action="index.py/upload" method="POST" enctype="multipart/form-data">
+        <table cellpadding="10">
+            <tr>
+                <td valign="top">
+                    <table style="-moz-border-radius:4px;border:1px solid #cccccc;background-color:#e5ecf9;width:10em;height:10em;padding:10px;">
+                        <tr>
+                            <td>
+                                Torrent File: <br />
+                                <input type="file" name="torrent"><br />
+                                Torrent URL: <br />
+                                <input type="text" name="torrenturl"><br />
+                                <br />
+                                Client Emulation: <br />
+                                <select name="emulator">
+<%
+for emu in emulators:
+  %>
+  <option value="<%=emu[1]%>"><%=emu[0]%></option>
+  <%
+%>
+                                </select> <br /> 
+                                <br />
+                                Upload Manipulation:
+                                <select name="fudge">
+<%
+for alg in fudges:
+  %>
+  <option value="<%=alg[1]%>"><%=alg[0]%></option>
+  <%
+%>
+                                </select> <br />
+                                <br />
+                                Upload Manipulation Coefficient (N): <br />
+                                <input type="text" name="factor" value="1.0" size="5"><br />
+                                <br />
+                                IP Address (Optional): <br />
+                                <input type="text" name="ipoverride" value=""><br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                <input type="submit" name="action" value="Create">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td valign="top">
+                    <font class="icon">Instructions</font> <br />
+                    <p>
+                    This utility will modify your Torrent files so that communications between
+                    your BitTorrent client and the actual BitTorrent tracker will be proxied
+                    by this host. The purpose of this tracker proxy is to slightly alter the
+                    transactions between your BitTorrent client and the actual tracker in 
+                    the following ways:
+                    </p>
+                    
+                    <p>
+                    You may designate the proxy to use different peer_id and
+                    User-Agent strings so as to work around private trackers 
+                    that may be blocking your particular client or version.
+                    </p>
+
+                    <p>
+                    You may also specify an upload manipulation formula so as
+                    to alter the upload / download statistic sent to the tracker.
+                    <br /><br />
+                    The upload manipulation modes are:
+                    <ul>
+                        <li>No Manipulation</li>
+                            <ul>
+                              <li>Nothing is done to your upload amount.</li>
+                            </ul>
+                        <li>Upload = N * Download</li>
+                            <ul>
+                                <li>Adjust your upload amount to some proportion of 
+                                    your download amount. <br />
+                                    NOTE: In this mode your upload amount will only 
+                                    be changed if your download &gt; upload.</li>
+                            </ul>
+                        <li>Upload = N * Upload</li>
+                            <ul>
+                                <li>Multiply your actual upload amount by some factor.</li>
+                            </ul>
+                    </ul>
+                    This is useful for torrents that are tracked by private trackers, that 
+                    enforce a strict upload / download ratio amongst their members.
+                    </p>
+
+                    <p>
+                    <b>To Use:</b> <br />
+                    <ol>
+                        <li>Locate and enter the torrent file you wish to proxy</li>
+                        <li>Select the client emulator to use (if any)</li>
+                        <li>Select the upload statistic manipulator you
+                             wish you use (if any)</li>
+                        <li>Enter the upload manipulation coefficient
+                             (don't be an ass and set it too high)</li>
+                        <li>If you choose, you may enter the ip address of
+                            your client (the proxy will try to figure this
+                            out itself; see below).</li>
+                        <li>Hit "Create" to create the proxied torrent file</li>
+                    </ol>
+                    You may load the resulting proxied torrent file into your
+                    BitTorrent client to begin downloading.
+                    </p>
+
+                    <p>
+                    IP addresses: <br />
+                    <br />
+                    The IP address sent to the tracker is the one from which
+                    your proxy request originated. However, if your client 
+                    specifies its own IP address in its tracker request,
+                    that one is used instead. (Azureus and other clients allow you
+                    to do this from the config menu).  If your client does not
+                    support this, and you are behind another L7 proxy, you may
+                    specify your IP address in the appropriate field to the
+                    left.  Under normal circumstances, however, you should not
+                    need to configure this option.
+                    </p>
+                </td>
+            </tr>
+        </table>
+</body>
+</html>
+

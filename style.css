@@ -1,0 +1,35 @@
+font {
+}
+
+font.icon {
+        font-size: 18pt;
+        color: #666;
+}
+
+font.subicon {
+        font-size: 5pt;
+        color: #666;
+}
+
+
+
+a {
+        font-size: 8pt;
+        color: #666;
+}
+
+.header {
+	text-align: right;
+	border: 1px solid #BA9;
+	padding: 10px; 
+}
+ 
+.block {
+	width: 200px;
+    border: 1px solid #BA9;
+    padding: 5px;
+    font-size: 8pt;
+    color: #666;
+}
+ 
+ 
