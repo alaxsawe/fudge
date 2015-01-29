@@ -23,7 +23,7 @@ import os, urllib, urlparse, urllib2, httplib, copy
 
 # Import BitTorrent library
 here = os.path.dirname(__file__)
-dep_module_path = [here, here + '/tryke']
+dep_module_path = [here, here + '/tryke/bt']
 client = apache.import_module('client', path = dep_module_path)
 bencode = apache.import_module('bencode', path = dep_module_path)
 
